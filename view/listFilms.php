@@ -1,8 +1,8 @@
 <?php ob_start(); ?>
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount() ?> films</p>
+<p>Il y a <?= $requete->rowCount() ?> films</p>
 
-<table class="uk-label uk-table-striped">
+<table>
     <thead>
         <tr>
             <th>TITRE</th>
@@ -14,7 +14,7 @@
             foreach($requete->fetchAll() as $film) { ?>
                 <tr>
                     <td><?= $film["titre"] ?></td>
-                    <td><?= $film["anne_sortie"] ?></td>
+                    <td><?= $film["annee_sortie"] ?></td>
                 </tr>
         <?php } ?>
     </tbody>
@@ -26,7 +26,4 @@
 $titre = "Liste des films";
 $titre_secondaire = "Liste des films";
 $contenu = ob_get_clean();
-require "view/template.php"
-
-// temporisation de sortie
-// Design pattern MVC dans mon appli
+require "view/template.php";

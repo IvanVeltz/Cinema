@@ -18,15 +18,8 @@ class CinemaController {
         require "view/listFilms.php";
     }
 
-    public function detaiFilm() {
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-            SELECT * 
-            FROM film
-            WHERE id_film = :id
-        ");
-        $requete->execute(["id"=> $id]);
-
-        require "view/detailFilm.php";
+    public function accueil(){
+        require "view/accueil.php";
     }
+
 }

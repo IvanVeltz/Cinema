@@ -17,3 +17,8 @@ abstract class Connect {
         }
     }
 }
+
+// Couche d'abstraction de données : permet de séparer les données brut du front end, ici on ne gère que la connexion à la bdd.
+// Cela permet d'interroger plus facilement les données peu importe où elle sont stockées
+
+// PDO : PHP Data Objects
