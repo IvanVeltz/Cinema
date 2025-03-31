@@ -1,13 +1,13 @@
 -- Informations d’un film (id_film) : titre, année, durée (au format HH:MM) et réalisateur
 SELECT 
     f.titre,
-    f.annee_de_sortie,
+    f.annee_sortie,
     TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%H:%i') AS duree_format_hh_mm,
-    CONCAT(a.prenom, ' ', a.nom) AS realisateur
+    CONCAT(p.prenom, ' ', p.nom) AS realisateur
 FROM 
     realisateur r
 INNER JOIN 
-    acteur a ON a.id_acteur = r.id_acteur
+    personne p ON p.id_personne = r.id_personne
 INNER JOIN 
     film f ON f.id_realisateur = r.id_realisateur
 
@@ -26,41 +26,43 @@ ORDER BY
 -- Liste des films d’un réalisateur (en précisant l’année de sortie) 
 SELECT 
     f.titre,
-    f.annee_de_sortie,
-    CONCAT(a.prenom, ' ', a.nom) AS realisateur
+    f.annee_sortie,
+    CONCAT(p.prenom, ' ', p.nom) AS realisateur
+FROM 
+    realisateur r
 INNER JOIN 
-    acteur a ON a.id_acteur = r.id_acteur
+    personne p ON p.id_personne = r.id_personne
 INNER JOIN 
     film f ON f.id_realisateur = r.id_realisateur
 WHERE 
-    f.id_realisateur = 1
+    r.id_realisateur = 1
 
 -- Nombre de films par genre (classés dans l’ordre décroissant)
 
 SELECT
-    g.categorie,
-    COUNT(po.id_film) AS nbr_de_film
+    g.type,
+    COUNT(e.id_film) AS nbr_de_film
 FROM
-    posseder po
+    etre e
 INNER JOIN
-    genre g ON g.id_genre = po.id_genre
+    genre g ON g.id_genre = e.id_genre
 GROUP BY
-    po.id_genre
+    e.id_genre
 ORDER BY 
     nbr_de_film DESC
 
 --  Nombre de films par réalisateur (classés dans l’ordre décroissant)
 SELECT 
-    COUNT(f.id_film) AS nbr_de_film,
-    CONCAT(a.prenom, ' ', a.nom) AS realisateur
+    CONCAT(p.prenom, ' ', p.nom) AS realisateur,
+    COUNT(f.id_film) AS nbr_de_film
 FROM 
     film f 
 INNER JOIN 
     realisateur r ON r.id_realisateur = f.id_realisateur
 INNER JOIN 
-    acteur a ON a.id_acteur = r.id_acteur
+    personne p ON p.id_personne = r.id_personne
 GROUP BY 
-    f.id_realisateur 
+    r.id_realisateur 
 ORDER BY 
     nbr_de_film DESC
 
@@ -68,32 +70,99 @@ ORDER BY
 
 SELECT 
     f.titre,
-    CONCAT(a.prenom, ' ', a.nom) AS acteurs,
-    a.sexe
+    CONCAT(p.prenom, ' ', p.nom) AS acteurs,
+    p.sexe
 FROM 
-    jouer j
+    casting c
 INNER JOIN 
-    acteur a ON a.id_acteur = j.id_acteur
+    acteur a ON a.id_acteur = c.id_acteur
 INNER JOIN 
-    film f ON f.id_film = j.id_film
+    personne p ON p.id_personne = a.id_personne
+INNER JOIN 
+    film f ON f.id_film = c.id_film
 WHERE 
-    j.id_film = 1
+    c.id_film = 1
 
 -- Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de
 -- sortie (du film le plus récent au plus ancien)
 
 SELECT 
     f.titre,
-    j.role,
-    f.annee_de_sortie
+    r.nom_role,
+    f.annee_sortie
 FROM 
-    jouer j
+    casting c
 INNER JOIN 
-    acteur a ON a.id_acteur = j.id_acteur
+    acteur a ON a.id_acteur = c.id_acteur
 INNER JOIN 
-    film f ON f.id_film = j.id_film
+    personne p ON p.id_personne = a.id_personne
+INNER JOIN 
+    film f ON f.id_film = c.id_film
+INNER JOIN 
+    role r ON r.id_role = c.id_role
 WHERE 
     a.id_acteur = 2
 ORDER BY 
-    f.annee_de_sortie DESC
+    f.annee_sortie DESC
+
+-- Liste des personnes qui sont à la fois acteurs et réalisateurs
+
+SELECT 
+    CONCAT (p.nom, ' ', p.prenom) AS realisateur_et_acteur
+FROM
+    personne p 
+INNER JOIN 
+    acteur a ON a.id_personne = p.id_personne
+INNER JOIN
+    realisateur r ON r.id_personne = p.id_personne
+
+-- Liste des films qui ont moins de 10 ans (classés du plus récent au plus ancien)
+
+SELECT 
+    f.titre,
+    f.annee_sortie
+FROM 
+    film f
+WHERE 
+    f.annee_sortie > YEAR(CURDATE()) - 10
+
+-- Nombre d’hommes et de femmes parmi les acteurs
+
+SELECT 
+    p.sexe,
+    COUNT(*)
+FROM
+    personne p 
+INNER JOIN 
+    acteur a ON a.id_personne = p.id_personne
+GROUP BY 
+    p.sexe
+
+-- Liste des acteurs ayant plus de 50 ans (âge révolu et non révolu)
+
+
+SELECT 
+    CONCAT(p.nom, ' ', p.prenom) AS acteurs,
+    CAST(TIMESTAMPDIFF(YEAR, p.date_naissance_personne, CURDATE()) AS SIGNED) AS age
+FROM 
+    personne AS p
+INNER JOIN 
+    acteur AS a ON a.id_personne = p.id_personne
+WHERE 
+    TIMESTAMPDIFF(YEAR, p.date_naissance_personne, CURDATE()) >= 50;
+
+-- Acteurs ayant joué dans 3 films ou plus
+
+SELECT 
+    CONCAT(p.nom, ' ', p.prenom) AS acteurs
+FROM 
+    personne p 
+INNER JOIN
+    acteur a ON a.id_personne p.id_personne
+INNER JOIN
+    casting c ON c.id_acteur = a.id_acteur
+GROUP BY 
+    acteurs 
+HAVING
+    COUNT(c.id_acteur) > 3
 
