@@ -158,7 +158,7 @@ SELECT
 FROM 
     personne p 
 INNER JOIN
-    acteur a ON a.id_personne p.id_personne
+    acteur a ON a.id_personne = p.id_personne
 INNER JOIN
     casting c ON c.id_acteur = a.id_acteur
 GROUP BY 
@@ -168,5 +168,10 @@ HAVING
 
 
 
-
+SELECT 
+    CONCAT(p.nom, ' ', p.prenom) AS acteurs
+FROM 
+    personne p 
+INNER JOIN
+    acteur a ON a.id_personne = p.id_personne
 

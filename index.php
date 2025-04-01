@@ -15,6 +15,10 @@ if(isset($_GET['action'])){
         
         case "listeFilms" : $ctrlCinema->listeFilms(); break;
         case "detailFilm" : $ctrlCinema->detailFilm($id); break;
+        case "listeActeurs" : $ctrlCinema->listeActeurs(); break;
+        case "detailActeur" : $ctrlCinema->detailActeur($id); break;
+        case "listeRealisateurs" : $ctrlCinema->listeRealisateurs(); break;
+        case "detailRealisateur" : $ctrlCinema->detailRealisateur($id); break;
 
         default: $ctrlCinema->accueil();
     }

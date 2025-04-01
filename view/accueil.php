@@ -4,33 +4,32 @@ ob_start();
 
 $genre = [];
 
-$films = $requete->fetchAll() ;
-foreach ($films as $film){
-    array_push($genre, $film['type']);
-};
-$film = $films[0]; 
+$film = $requete->fetch() ;
+
 
 ?>
 
-<section class="filmMoment">
+<section class="container-film">
         
                 <a href="index.php?action=detailFilm&id=<?=$film['id_film']?>">
-                <h3><?= $film["titre"]?></h3>
-                <div class="container-film-moment">
-                    <aside>
-                        <p> Realisateur : <?= $film['realisateur'] ?></p>
-                        <p>Sortie en <?= $film["annee_sortie"] ?></p>
-                        <p>Genre : <?php for ($i=0; $i<count($genre); $i++){
-                            echo "$genre[$i] ";
-                        } ?></p>
-                    </aside>
-                    <article>
-                        <p class="synopsis">Synopsis : <?= $film['synopsis']?></p>
-                    </article>
-                    <figure>
-                        <img src="<?= $film['affiche'] ?>" alt="affiche du film">
-                    </figure>
-                </div>
+                    <div class="card border-primary mb-3">
+                        <div class="card-header"><?= $film["titre"]?></div>
+                        <div class="card-body container-film-moment">
+                            <aside>
+                                <p> Realisateur : <?= $film['realisateur'] ?></p>
+                                <p>Sortie en <?= $film["annee_sortie"] ?></p>
+                                <p>Genre : <?= $film["genres"]?></p>
+                                <p>Durée : <?= $film["temps"] ?></p>
+                                <p>Note : <?= $film["note"]?>/5</p>
+                            </aside>
+                            <article>
+                                <p class="synopsis">Synopsis : <?= $film['synopsis']?></p>
+                            </article>
+                            <figure>
+                                <img src="<?= $film['affiche'] ?>" alt="affiche du film">
+                            </figure>
+                        </div>
+                    </div>
                 </a>
 </section>
 

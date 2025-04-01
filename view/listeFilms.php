@@ -2,28 +2,28 @@
 
 <p>Il y a <?= $requete->rowCount() ?> films</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-            foreach($requete->fetchAll() as $film) { ?>
-                <tr>
-                    <td><?= $film["titre"] ?></td>
-                    <td><?= $film["annee_sortie"] ?></td>
-                </tr>
-        <?php } ?>
-    </tbody>
+
+<div class="container-films">
+<?php
+foreach($requete->fetchAll() as $film){
+    ?>
+    <div class="card border-primary mb-3">
+        <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
+            <div class="card-header"><?= $film['titre']?></div>
+        </a>
+    </div>
     
-</table>
+<?php
+    
+}
+?>
+</div>
+        
+    
 
 <?php 
 
 $titre = "Liste des films";
-$titre_secondaire = "Liste des films";
+$titre_secondaire = $film['type'];
 $contenu = ob_get_clean();
 require "view/template.php";

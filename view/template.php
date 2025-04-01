@@ -20,15 +20,39 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms">Films
+          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=1">Action
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=2">Drame
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=3">Science-Fiction
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=4">Comédie
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=5">Horreur
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeActeurs">Acteurs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=listeRealisateurs">Réalisateurs
+          </a>
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" href="index.php?action=listeActeurs">Acteurs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="index.php?action=listeRealisateurs">Réalisateurs</a>
-        </li>
+        </li> -->
         
     </div>
   </div>
@@ -36,7 +60,6 @@
 <div id="wrapper">
         <main>
             <div id=contenu>
-                <h1>PDO Cinema</h1>
                 <h2><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>

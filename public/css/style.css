@@ -40,13 +40,32 @@ body {
     flex: 1;
 }
 
-.filmMoment{
+.container-film{
     width:60%;
     margin:auto;
 }
 
+.container-acteur{
+    width: 300px;
+    margin: auto;
+}
+
+.acteur p{
+    text-align: left;
+}
+
+.acteur ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 a{
     text-decoration: none !important;
+}
+
+p a:hover, .acteur a:hover{
+    text-decoration: underline !important;
 }
 
 .container-film-moment{
@@ -54,12 +73,31 @@ a{
 }
 
 .container-film-moment aside, .container-film-moment figure{
-    width: 30%;
+    width: 35% !important;
+    margin : 1em 0em;
+}
+
+.container-film-moment article{
+    width: 60%;
+    text-align: justify;
+    margin: 1em;
+}
+
+.container-film-moment p{
+    margin :1em;
 }
 
 img{
     width: 100%;
     height: auto;
+}
+
+.container-acteurs, .container-realisateurs, .container-films{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: auto;
 }
 
 
