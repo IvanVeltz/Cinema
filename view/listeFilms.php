@@ -24,6 +24,6 @@ foreach($requete->fetchAll() as $film){
 <?php 
 
 $titre = "Liste des films";
-$titre_secondaire = $film['type'];
+$titre_secondaire = $requete2->fetch()['type'];
 $contenu = ob_get_clean();
 require "view/template.php";

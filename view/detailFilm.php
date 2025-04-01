@@ -13,7 +13,14 @@ $film = $requete1->fetch();
             <aside>
                 <p> Realisateur : <a href="index.php?action=detailRealisateur&id=<?=$film['id_realisateur']?>"><?= $film['realisateur'] ?></a></p>
                 <p>Sortie en <?= $film["annee_sortie"] ?></p>
-                <p>Genre : <?= $film["genres"]?></p>
+                <p>Genre :
+                    <?php foreach($requete3->fetchAll() as $genre){
+                    ?>
+                    <a href="index.php?action=listeFilms&id=<?=$genre['id_genre']?>"><?=$genre['type']?></a>
+                    <?php
+                };
+                ?>
+                </p>
                 <p>Durée : <?= $film["temps"] ?></p>
                 <p>Note : <?= $film["note"]?>/5</p>
                 <p>Acteur :

@@ -6,7 +6,7 @@ use Model\Connect;
 class CinemaController {
 
     // Lister les films 
-    public function listeFilms() {
+    public function listeFilms($id) {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
@@ -27,8 +27,20 @@ class CinemaController {
             GROUP BY f.id_film  
         ");
         $requete->execute([
-            "id"=>$_GET['id_genre']
+            "id"=>$id
         ]);
+
+        $requete2 = $pdo->prepare("
+            SELECT
+                type
+            FROM
+                genre
+            WHERE id_genre = :id
+        ");
+        $requete2->execute([
+            "id"=>$id
+        ]);
+
 
         require "view/listeFilms.php";
     }
@@ -77,8 +89,8 @@ class CinemaController {
         $requete1 = $pdo->prepare("
             SELECT 
                 f.id_film, f.titre, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, 
-                CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche, 
-                GROUP_CONCAT(g.type SEPARATOR ', ') AS genres, CONCAT(p.nom, ' ', p.prenom) AS realisateur,
+                CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche,
+                CONCAT(p.nom, ' ', p.prenom) AS realisateur,
                 f.id_realisateur, f.note
             FROM 
                 film f
@@ -113,6 +125,22 @@ class CinemaController {
                 c.id_film = :id
         ");
         $requete2->execute([
+            "id"=>$id
+        ]);
+
+        $requete3 = $pdo->prepare("
+            SELECT
+                fg.id_film,
+                fg.id_genre,
+                g.type
+            FROM
+                film_genre fg
+            INNER JOIN
+                genre g ON g.id_genre = fg.id_genre
+            WHERE
+                fg.id_film = :id
+        ");
+        $requete3->execute([
             "id"=>$id
         ]);
 
@@ -203,27 +231,13 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
         SELECT  
-            f.id_film, f.titre, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, 
-            CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche, 
-		    GROUP_CONCAT(g.type SEPARATOR ', ') AS genres, CONCAT(p.nom, ' ', p.prenom) AS realisateur,
-            f.note
-        FROM 
+            f.id_film, f.titre
+        FROM
             film f
-        INNER JOIN 
-            realisateur r ON r.id_realisateur = f.id_realisateur
-        INNER JOIN 
-            personne p ON p.id_personne = r.id_personne
-        INNER JOIN 
-            film_genre fg ON fg.id_film = f.id_film
-        INNER JOIN 
-            genre g ON g.id_genre = fg.id_genre
-        GROUP BY 
-            f.id_film
-        ORDER BY 
-            f.annee_sortie DESC
-        LIMIT 1
-
+        LIMIT 5
         ");
+
+        
         require "view/accueil.php";
     }
 

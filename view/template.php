@@ -20,23 +20,23 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=1">Action
+          <a class="nav-link active" href="index.php?action=listeFilms&id=1">Action
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=2">Drame
+          <a class="nav-link active" href="index.php?action=listeFilms&id=2">Drame
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=3">Science-Fiction
+          <a class="nav-link active" href="index.php?action=listeFilms&id=3">Science-Fiction
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=4">Comédie
+          <a class="nav-link active" href="index.php?action=listeFilms&id=4">Comédie
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id_genre=5">Horreur
+          <a class="nav-link active" href="index.php?action=listeFilms&id=5">Horreur
           </a>
         </li>
         <li class="nav-item">
@@ -45,6 +45,10 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="index.php?action=listeRealisateurs">Réalisateurs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php?action=gestion">Gestion
           </a>
         </li>
         <!-- <li class="nav-item">
