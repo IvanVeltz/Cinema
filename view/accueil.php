@@ -23,7 +23,7 @@ $film = $requete->fetch() ;
                                 <p>Note : <?= $film["note"]?>/5</p>
                             </aside>
                             <article>
-                                <p class="synopsis">Synopsis : <?= $film['synopsis']?></p>
+                                <p class="synopsis">Synopsis :<br><?= $film['synopsis']?></p>
                             </article>
                             <figure>
                                 <img src="<?= $film['affiche'] ?>" alt="affiche du film">
