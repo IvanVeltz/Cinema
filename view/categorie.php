@@ -4,6 +4,7 @@
 <form action="index.php?action=ajoutCategorie" method="post">
     <div class="input-group mb-3">
         <label for="input-genre">Ajouter une catégorie</label>
+    </div>
     <div>
         <input type="text" id="input-genre" name="nom_categorie">
         <input class="btn btn-primary" type="submit" name="submit">Ajouter</input>

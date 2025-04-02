@@ -17,6 +17,20 @@ class FilmController{
         LIMIT 5
         ");
 
+        $requete2 = $pdo->query('
+            SELECT id_genre, type
+            FROM genre
+        ');
+
+        $requete3 = $pdo->query('
+            SELECT
+                CONCAT(r.id_realisateur," ",p.nom," ",p.prenom) AS realisateur,
+                r.id_realisateur
+            FROM
+                personne p
+            INNER JOIN
+                realisateur r WHERE r.id_personne = p.id_personne
+        ');
         
         require "view/accueil.php";
     }
@@ -128,5 +142,65 @@ class FilmController{
         ]);
 
         require "view/detailFilm.php";
+    }
+
+    // AJouter Film
+    public function ajoutFilm(){
+        if(isset($_POST['submit'])){
+            var_dump($_POST['submit']);
+            exit;
+            // On récupère les infos du films
+            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $annee = filter_input(INPUT_POST, "annee", FILTER_SANITIZE_NUMBER_INT);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_SANITIZE_NUMBER_INT);
+            $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
+            $idRealisateur = filter_input(INPUT_POST, "realisateur", FILTER_SANITIZE_NUMBER_INT);
+
+            // On récupère les genres cochés
+            $categories = filter_input(INPUT_POST, 'categorie', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+                                   
+
+            // On ajoute le film si toutes les données sont correctes
+            if($titre && $annee && $duree && $synopsis && $note!==false && $idRealisateur){
+                $affiche = "public/img/$titre.png";
+                $pdo = Connect::seConnecter();
+                                
+                $requete = $pdo->prepare('
+                    INSERT INTO
+                        film (titre, annee_sortie, duree, synopsis, note, affiche, id_realisateur)
+                    VALUES (:titre, :annee, :duree, :synopsis, :note, :affiche, :id_realisateur)
+                
+                ');
+                $requete->execute([
+                    'titre'=>$titre,
+                    'annee'=>$annee,
+                    'duree'=>$duree,
+                    'synopsis'=>$synopsis,
+                    'note'=> $note,
+                    'affiche'=> $affiche,
+                    'id_realisateur'=>$idRealisateur
+                ]);
+            
+
+                $idFilm = $pdo->lastInsertId();    
+
+                if(!empty($categories)){
+                    foreach($categories as $categorie){
+                        $requete2 = $pdo->prepare('
+                        INSERT INTO film_genre (id_film, id_genre)
+                        VALUES (:id_film, :id_genre)
+                        ');
+                        $requete2->execute([
+                            'id_film'=>$idFilm,
+                            'id_genre'=>$categorie
+                        ]);
+                    }
+                }
+            }
+        }
+        header("Location:index.php?action=accueil");
+
+        
     }
 }

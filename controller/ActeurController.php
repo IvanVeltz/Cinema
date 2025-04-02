@@ -71,7 +71,7 @@ class ActeurController{
             $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $ddn = filter_input(INPUT_POST, "ddn", FILTER_SANITIZE_STRING);
+            $ddn = filter_input(INPUT_POST, "ddn", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if($nom&&$prenom&&$sexe&&$ddn){
 
                 $pdo = Connect::seConnecter();

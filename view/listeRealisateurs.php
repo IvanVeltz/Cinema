@@ -2,7 +2,8 @@
 <!-- Ajout d'un realisateur  -->
 <form action="index.php?action=ajoutRealisateur" method="post">
     <div class="input-group mb-3">
-        <label for="input-genre">Ajouter un acteur</label>
+        <label>Ajouter un acteur</label>
+    </div>    
     <div>
         <label for="input-nom">Nom :</label>
         <input type="text" id="input-nom" name="nom">
