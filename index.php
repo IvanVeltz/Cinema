@@ -1,18 +1,21 @@
 <?php
 
 use Controller\CinemaController;
+use Controller\FormController;
 
 spl_autoload_register(function ($class_name) {
     include $class_name.'.php';
 });
 
 $ctrlCinema = new CinemaController();
+$ctrlFomrm = new FormController();
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET['action'])){
     switch ($_GET['action']) {
         
+        case "categorie" : $ctrlCinema->categorie(); break;
         case "listeFilms" : $ctrlCinema->listeFilms($id); break;
         case "detailFilm" : $ctrlCinema->detailFilm($id); break;
         case "listeActeurs" : $ctrlCinema->listeActeurs(); break;
@@ -26,6 +29,7 @@ if(isset($_GET['action'])){
 } else {
     $ctrlCinema->accueil();
 }
+
 
 
 // temporisation de sortie : Une mise en mémoire de la sortie, tant que la temporisation est active (ob_start), aucune sortie n'est envoyé par le script

@@ -16,7 +16,11 @@ $date = date("d/m/Y", strtotime($realisateur['date_naissance_personne']));
         <ul>
             <?php foreach($requete2->fetchAll() as $film){
                 ?>
-                    <li><a href="index.php?action=detailFilm&id=<?=$film['id_film']?>"><?=$film['titre'] ?></a></li>
+                    <li>
+                        <a href="index.php?action=detailFilm&id=<?=$film['id_film']?>">
+                            <?=$film['titre'].' - '.$film['annee_sortie'] ?>
+                        </a>
+                    </li>
                 <?php
             }
             ?>

@@ -20,25 +20,10 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id=1">Action
+          <a class="nav-link active" href="index.php?action=categorie">Catégorie
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id=2">Drame
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id=3">Science-Fiction
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id=4">Comédie
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeFilms&id=5">Horreur
-          </a>
-        </li>
+    
         <li class="nav-item">
           <a class="nav-link active" href="index.php?action=listeActeurs">Acteurs
           </a>
@@ -47,16 +32,6 @@
           <a class="nav-link active" href="index.php?action=listeRealisateurs">Réalisateurs
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=gestion">Gestion
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="index.php?action=listeActeurs">Acteurs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.php?action=listeRealisateurs">Réalisateurs</a>
-        </li> -->
         
     </div>
   </div>

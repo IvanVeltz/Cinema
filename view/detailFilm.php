@@ -11,9 +11,9 @@ $film = $requete1->fetch();
         <div class="card-header"><?= $film["titre"]?></div>
         <div class="card-body container-film-moment">
             <aside>
-                <p> Realisateur : <a href="index.php?action=detailRealisateur&id=<?=$film['id_realisateur']?>"><?= $film['realisateur'] ?></a></p>
+                <p> Realisateur :<br> <a href="index.php?action=detailRealisateur&id=<?=$film['id_realisateur']?>"><?= $film['realisateur'] ?></a></p>
                 <p>Sortie en <?= $film["annee_sortie"] ?></p>
-                <p>Genre :
+                <p>Genre :<br>
                     <?php foreach($requete3->fetchAll() as $genre){
                     ?>
                     <a href="index.php?action=listeFilms&id=<?=$genre['id_genre']?>"><?=$genre['type']?></a>
@@ -23,11 +23,12 @@ $film = $requete1->fetch();
                 </p>
                 <p>Durée : <?= $film["temps"] ?></p>
                 <p>Note : <?= $film["note"]?>/5</p>
-                <p>Acteur :
+                <p>Acteur :<br>
                 <?php foreach($requete2->fetchAll() as $acteur){
                     ?>
                     <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
-                    <?= $acteur['acteurs']." ";
+                    <?= $acteur['acteurs']." (".$acteur['nom_role'].")<br>"?>
+                <?php
                 };
                 ?>
                     </a>

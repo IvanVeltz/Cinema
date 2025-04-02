@@ -5,6 +5,19 @@ use Model\Connect;
 
 class CinemaController {
 
+    // Lister les catégories
+    public function categorie(){
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+            SELECT id_genre, type
+            FROM genre
+            ORDER BY type
+        ");
+
+        require "view/categorie.php";
+    }
+
     // Lister les films 
     public function listeFilms($id) {
 
@@ -114,15 +127,19 @@ class CinemaController {
         $requete2 = $pdo->prepare("
             SELECT
                 CONCAT(p.nom, ' ', p.prenom) AS acteurs,
-                a.id_acteur
+                a.id_acteur,
+                r.nom_role
             FROM
                 acteur a
             INNER JOIN 
                 personne p ON p.id_personne = a.id_personne 
             INNER JOIN
-                casting c ON c.id_acteur = a.id_acteur 
+                casting c ON c.id_acteur = a.id_acteur
+            INNER JOIN
+                role r ON r.id_role = c.id_role
             WHERE
                 c.id_film = :id
+            ORDER BY acteurs
         ");
         $requete2->execute([
             "id"=>$id
@@ -169,13 +186,16 @@ class CinemaController {
         $requete2 = $pdo->prepare("
             SELECT
                 f.titre,
-                f.id_film
+                f.id_film,
+                r.nom_role
             FROM
                 film f
             INNER JOIN
                 casting c ON c.id_film = f.id_film
             INNER JOIN
                 acteur a ON a.id_acteur = c.id_acteur
+            INNER JOIN 
+                role r ON r.id_role = c.id_role
             WHERE
                 a.id_acteur = :id
         ");
@@ -210,13 +230,16 @@ class CinemaController {
         $requete2 = $pdo->prepare("
             SELECT
                 f.titre,
-                f.id_film
+                f.id_film,
+                f.annee_sortie
             FROM
                 film f
             INNER JOIN
                 realisateur r ON r.id_realisateur = f.id_realisateur
             WHERE
                 f.id_realisateur = :id
+            ORDER BY
+                f.annee_sortie DESC
         ");
         $requete2->execute([
             "id"=>$id
