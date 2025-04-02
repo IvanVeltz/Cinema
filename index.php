@@ -1,34 +1,40 @@
 <?php
 
-use Controller\CinemaController;
-use Controller\FormController;
+use Controller\CategorieController;
+use Controller\ActeurController;
+use Controller\FilmController;
+use Controller\RealisateurController;
 
 spl_autoload_register(function ($class_name) {
     include $class_name.'.php';
 });
 
-$ctrlCinema = new CinemaController();
-$ctrlFomrm = new FormController();
+
+$ctrlActeur = new ActeurController();
+$ctrlFilm = new FilmController();
+$ctrlRealisateur = new RealisateurController();
+$ctrlCategorie = new CategorieController();
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET['action'])){
     switch ($_GET['action']) {
         
-        case "categorie" : $ctrlCinema->categorie(); break;
-        case "listeFilms" : $ctrlCinema->listeFilms($id); break;
-        case "detailFilm" : $ctrlCinema->detailFilm($id); break;
-        case "listeActeurs" : $ctrlCinema->listeActeurs(); break;
-        case "detailActeur" : $ctrlCinema->detailActeur($id); break;
-        case "listeRealisateurs" : $ctrlCinema->listeRealisateurs(); break;
-        case "detailRealisateur" : $ctrlCinema->detailRealisateur($id); break;
-        case "gestion" : $ctrlCinema->gestion(); break;
+        case "listeFilms" : $ctrlFilm->listeFilms($id); break;
+        case "detailFilm" : $ctrlFilm->detailFilm($id); break;
+        case "listeActeurs" : $ctrlActeur->listeActeurs(); break;
+        case "detailActeur" : $ctrlActeur->detailActeur($id); break;
+        case "listeRealisateurs" : $ctrlRealisateur->listeRealisateurs(); break;
+        case "detailRealisateur" : $ctrlRealisateur->detailRealisateur($id); break;
+        case "categorie" : $ctrlCategorie->categorie(); break;
+        case "ajoutCategorie" : $ctrlCategorie->ajoutCategorie(); break;
 
-        default: $ctrlCinema->accueil();
+        default: $ctrlFilm->accueil();
     }
 } else {
-    $ctrlCinema->accueil();
+    $ctrlFilm->accueil();
 }
+
 
 
 
