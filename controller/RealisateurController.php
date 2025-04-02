@@ -61,5 +61,39 @@ class RealisateurController{
 
         require "view/detailRealisateur.php";
     }
+
+    // Ajout realisateur
+    public function ajoutRealisateur(){
+        if (isset($_POST['submit'])){
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $ddn = filter_input(INPUT_POST, "ddn", FILTER_SANITIZE_STRING);
+            if($nom&&$prenom&&$sexe&&$ddn){
+
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                INSERT INTO personne (nom, prenom, sexe, date_naissance_personne)
+                VALUES (:nom, :prenom, :sexe, :ddn)
+                ');
+                $requete->execute([
+                    'nom'=>$nom,
+                    'prenom'=>$prenom,
+                    'sexe'=>$sexe,
+                    'ddn'=>$ddn
+                ]);
+                $idPersonne = $pdo->lastInsertId();
+                $requete2 = $pdo->prepare('
+                INSERT INTO realisateur (id_personne)
+                VALUES (:id_personne)
+                ');
+                $requete2->execute([
+                    'id_personne'=>$idPersonne
+                ]);
+            }
+        }
+
+        header("Location:index.php?action=listeRealisateurs");
+    }
     
 }

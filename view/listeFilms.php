@@ -1,7 +1,9 @@
 <?php ob_start(); ?>
 
-<p>Il y a <?= $requete->rowCount() ?> films</p>
 
+
+
+<p>Il y a <?= $requete->rowCount() ?> films</p>
 
 <div class="container-films">
 <?php

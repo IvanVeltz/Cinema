@@ -111,12 +111,10 @@ form div{
     flex-direction: column;
     justify-content: center; 
     align-items: center; 
+    gap: 10px;
 }
 
-form div div{
-    display: flex;
-    flex-direction: row;
-}
+
 
 
 .navbar a{

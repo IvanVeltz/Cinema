@@ -21,15 +21,17 @@ class CategorieController{
     // Ajouter une catégorie
     public function ajoutCategorie(){
         if (isset($_POST['submit'])){
-            $categorie = htmlspecialchars($_POST['submit']); 
-            $pdo = Connect::seConnecter();
-            $requete = $pdo->prepare('
-                INSERT INTO genre (type)
-                VALUES (:type)
-            ');
-            $requete->execute([
-                'type'=>$categorie
-            ]);
+            $categorie = filter_input(INPUT_POST, "nom_categorie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if($categorie){
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                    INSERT INTO genre (type)
+                    VALUES (:type)
+                ');
+                $requete->execute([
+                    'type'=>$categorie
+                ]);
+            }
         }
 
         header("Location:index.php?action=categorie");

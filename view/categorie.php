@@ -5,8 +5,8 @@
     <div class="input-group mb-3">
         <label for="input-genre">Ajouter une catégorie</label>
     <div>
-        <input type="text" id="input-genre" name="submit">
-        <button class="btn btn-primary" type="submit" >Ajouter</button>
+        <input type="text" id="input-genre" name="nom_categorie">
+        <input class="btn btn-primary" type="submit" name="submit">Ajouter</input>
     </div>
     </div>
 </form>
