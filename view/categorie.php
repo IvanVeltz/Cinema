@@ -1,5 +1,15 @@
 <?php ob_start(); ?>
 
+<!-- Ajout d'une catégorie  -->
+<form action="index.php?action=ajoutCategorie" method="post">
+    <div class="input-group mb-3">
+        <label for="input-genre">Ajouter une catégorie</label>
+    <div>
+        <input type="text" id="input-genre" name="submit">
+        <button class="btn btn-primary" type="submit" >Ajouter</button>
+    </div>
+    </div>
+</form>
 <p>Il y a <?= $requete->rowCount() ?> catégorie</p>
 
 <div class="container-acteurs">
@@ -16,13 +26,7 @@ foreach($requete->fetchAll() as $categorie){
     
 }
 ?>
-<form action="index.php?action=ajoutCategorie" method="post">
-    <div class="input-group mb-3">
-        <label for="input-genre">Ajouter un genre</label>
-        <input type="text" id="input-genre" name="submit">
-        <button class="btn btn-primary" type="submit" >Ajouter</button>
-    </div>
-</form>
+
 <?php
 
 $titre = "Liste des catégorie";
