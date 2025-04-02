@@ -21,8 +21,7 @@ class CategorieController{
     // Ajouter une catégorie
     public function ajoutCategorie(){
         if (isset($_POST['submit'])){
-            $categorie = filter_input(INPUT_POST, "submit", FILTER_SANITIZE_STRING);
-
+            $categorie = htmlspecialchars($_POST['submit']); 
             $pdo = Connect::seConnecter();
             $requete = $pdo->prepare('
                 INSERT INTO genre (type)
@@ -33,6 +32,6 @@ class CategorieController{
             ]);
         }
 
-        require "view/accueil.php";
+        header("Location:index.php?action=categorie");
     }
 }

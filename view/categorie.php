@@ -19,8 +19,8 @@ foreach($requete->fetchAll() as $categorie){
 <form action="index.php?action=ajoutCategorie" method="post">
     <div class="input-group mb-3">
         <label for="input-genre">Ajouter un genre</label>
-        <input type="text" id="input-genre">
-        <button class="btn btn-primary" type="submit" name="submit">Ajouter</button>
+        <input type="text" id="input-genre" name="submit">
+        <button class="btn btn-primary" type="submit" >Ajouter</button>
     </div>
 </form>
 <?php
