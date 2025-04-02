@@ -41,7 +41,7 @@ $genre = [];
         <label for="input-realisateur">Réalisateur : </label>
         <select name="realisateur" id="input-realisateur">
             <?php foreach($requete3->fetchAll() as $realisteur){
-                echo "<option value='".$realisteur['id_realisteur'].
+                echo "<option value='".$realisteur['id_realisateur'].
                 "'>".$realisteur['realisateur']."</option>";
             }
             ?>

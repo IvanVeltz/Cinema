@@ -160,8 +160,9 @@ class FilmController{
                                    
 
             // On ajoute le film si toutes les données sont correctes
-            if($titre && $annee && $duree && $synopsis && $note!==false && $idRealisateur){
+            if($titre && $annee && $duree && $synopsis && $note && $idRealisateur){
                 $affiche = "public/img/$titre.png";
+                
                 $pdo = Connect::seConnecter();
                                 
                 $requete = $pdo->prepare('
