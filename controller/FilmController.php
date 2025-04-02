@@ -147,8 +147,6 @@ class FilmController{
     // AJouter Film
     public function ajoutFilm(){
         if(isset($_POST['submit'])){
-            var_dump($_POST['submit']);
-            exit;
             // On récupère les infos du films
             $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $annee = filter_input(INPUT_POST, "annee", FILTER_SANITIZE_NUMBER_INT);
