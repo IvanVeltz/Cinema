@@ -17,7 +17,18 @@ class ActeurController{
             ORDER BY
                 acteurs
             ");
-    
+
+            $requete2 = $pdo->query("
+            SELECT 
+                a.id_acteur, CONCAT(p.nom, ' ', p.prenom) AS acteurs,
+                a.id_acteur,
+                p.id_personne
+            FROM 
+                personne p 
+            INNER JOIN
+                acteur a ON a.id_personne = p.id_personne
+            ");
+
             require "view/listeActeurs.php";
     }
 
@@ -97,6 +108,26 @@ class ActeurController{
         }
 
         header("Location:index.php?action=listeActeurs");
+    }
+
+    // Suppression d'un realisateur
+    public function supprimeActeur(){
+
+    if (isset($_POST['submit'])){
+        $id =  filter_input(INPUT_POST, "idActeur", FILTER_SANITIZE_NUMBER_INT);
+        if($id){
+            $pdo = Connect::seConnecter();
+            $requete = $pdo->prepare('
+            DELETE FROM personne
+            WHERE id_personne = :id
+            ');
+            $requete->execute([
+                'id'=>$id
+            ]);
+        }
+    }
+
+    header("Location:index.php?action=listeActeurs");
     }
     
 }

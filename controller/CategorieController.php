@@ -14,6 +14,10 @@ class CategorieController{
             FROM genre
             ORDER BY type
         ");
+        $requete2 = $pdo->query("
+            SELECT id_genre, type
+            FROM genre
+        ");
 
         require "view/categorie.php";
     }
@@ -34,6 +38,26 @@ class CategorieController{
             }
         }
 
+        header("Location:index.php?action=categorie");
+    }
+
+    // Supprimer film
+    public function supprimeCategorie(){
+
+        if (isset($_POST['submit'])){
+            $id =  filter_input(INPUT_POST, "idCategorie", FILTER_SANITIZE_NUMBER_INT);
+            if($id){
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                DELETE FROM genre
+                WHERE id_genre = :id
+                ');
+                $requete->execute([
+                    'id'=>$id
+                ]);
+            }
+        }
+    
         header("Location:index.php?action=categorie");
     }
 }

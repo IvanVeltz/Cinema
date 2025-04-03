@@ -23,15 +23,18 @@ if(isset($_GET['action'])){
         case "listeFilms" : $ctrlFilm->listeFilms($id); break;
         case "detailFilm" : $ctrlFilm->detailFilm($id); break;
         case "ajoutFilm" : $ctrlFilm->ajoutFilm(); break;
+        case "supprimeFilm" : $ctrlFilm->supprimeFilm(); break;
         case "listeActeurs" : $ctrlActeur->listeActeurs(); break;
         case "detailActeur" : $ctrlActeur->detailActeur($id); break;
         case "ajoutActeur" : $ctrlActeur->ajoutActeur(); break;
+        case "supprimeActeur" :$ctrlActeur->supprimeActeur(); break;
         case "listeRealisateurs" : $ctrlRealisateur->listeRealisateurs(); break;
         case "detailRealisateur" : $ctrlRealisateur->detailRealisateur($id); break;
         case "ajoutRealisateur" : $ctrlRealisateur->ajoutRealisateur(); break;
         case "supprimeRealisateur" : $ctrlRealisateur->supprimeRealisateur(); break;
         case "categorie" : $ctrlCategorie->categorie(); break;
         case "ajoutCategorie" : $ctrlCategorie->ajoutCategorie(); break;
+        case "supprimeCategorie" : $ctrlCategorie->supprimeCategorie(); break;
 
         default: $ctrlFilm->accueil();
     }

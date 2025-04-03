@@ -31,6 +31,13 @@ class FilmController{
             INNER JOIN
                 realisateur r WHERE r.id_personne = p.id_personne
         ');
+
+        $requete4 = $pdo->query("
+        SELECT  
+            f.id_film, f.titre
+        FROM
+            film f
+        ");
         
         require "view/accueil.php";
     }
@@ -201,5 +208,25 @@ class FilmController{
         header("Location:index.php?action=accueil");
 
         
+    }
+
+    // Supprimer film
+    public function supprimeFilm(){
+
+        if (isset($_POST['submit'])){
+            $id =  filter_input(INPUT_POST, "idFilm", FILTER_SANITIZE_NUMBER_INT);
+            if($id){
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                DELETE FROM film
+                WHERE id_film = :id
+                ');
+                $requete->execute([
+                    'id'=>$id
+                ]);
+            }
+        }
+    
+        header("Location:index.php?action=listeFilm");
     }
 }
