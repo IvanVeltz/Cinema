@@ -45,12 +45,15 @@ body {
 }
 
 .container-film{
-    width:80%;
+    width:100%;
 }
 
 .container-acteur{
+    width : 70%;
     margin: auto;
 }
+
+
 
 .acteur p{
     text-align: left;
@@ -107,6 +110,15 @@ img{
     width: 120px;
 }
 
+.card-film{
+    width : 100%;
+}
+
+.card-acteur{
+    margin: auto;
+    width: 100%;
+}
+
 #wrapper .container-form{
     display: flex;
     align-items: center; 
@@ -146,6 +158,11 @@ form div{
     text-align: center;
 }
 
+.modif-film div{
+    flex-direction: row;
+}
+
+/* *****FOOTER***** */
 
 .footer-title-wrapper {
     margin-top: var(--spacing-lg);

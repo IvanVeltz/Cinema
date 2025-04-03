@@ -11,7 +11,7 @@ foreach($requete->fetchAll() as $film){
     ?>
     <div class="card border-primary mb-3">
         <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
-            <div class="card-header"><?= $film['titre']?></div>
+            <?= $film['titre']?>
         </a>
     </div>
     

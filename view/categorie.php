@@ -37,7 +37,7 @@
 foreach($requete->fetchAll() as $categorie){
     ?>
     <div class="card border-primary mb-3">
-        <a href="index.php?action=detailFilms&id=<?=$categorie['id_genre']?>">
+        <a href="index.php?action=detailCategorie&id=<?=$categorie['id_genre']?>">
             <?= $categorie['type']?>
         </a>
     </div>

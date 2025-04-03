@@ -23,7 +23,7 @@ $genre = [];
                 <input type="text" id="input-synopsis" name="synopsis">
                 <label for="input-note">Note /5</label>
                 <select name="note" id="input-note">
-                    <?php for($i=0;$i<=5; $i++){
+                    <?php for($i=1;$i<=5; $i++){
                         echo "<option value='$i'>$i</option>";
                     }
                     ?>

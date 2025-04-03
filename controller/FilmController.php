@@ -42,53 +42,14 @@ class FilmController{
         require "view/accueil.php";
     }
     
-    // Lister les films 
-    public function listeFilms($id) {
-
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-            SELECT 
-                f.id_film, f.titre, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, g.type, 
-                CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche, CONCAT(p.nom, ' ', p.prenom) AS realisateur
-            FROM
-                film f
-            INNER JOIN 
-                film_genre fg ON fg.id_film = f.id_film
-            INNER JOIN 
-                genre g ON g.id_genre = fg.id_genre
-            INNER JOIN 
-                realisateur r ON r.id_realisateur = f.id_realisateur
-            INNER JOIN 
-                personne p ON p.id_personne = r.id_personne
-            WHERE g.id_genre = :id
-            GROUP BY f.id_film  
-        ");
-        $requete->execute([
-            "id"=>$id
-        ]);
-
-        $requete2 = $pdo->prepare("
-            SELECT
-                type
-            FROM
-                genre
-            WHERE id_genre = :id
-        ");
-        $requete2->execute([
-            "id"=>$id
-        ]);
-
-
-        require "view/listeFilms.php";
-    }
-
+    
     // Détail Film
     public function detailFilm($id){
 
         $pdo = Connect::seConnecter();
         $requete1 = $pdo->prepare("
             SELECT 
-                f.id_film, f.titre, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, 
+                f.id_film, f.titre,f.duree, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, 
                 CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche,
                 CONCAT(p.nom, ' ', p.prenom) AS realisateur,
                 f.id_realisateur, f.note
@@ -147,6 +108,23 @@ class FilmController{
         $requete3->execute([
             "id"=>$id
         ]);
+
+        $requete4 = $pdo->query('
+            SELECT id_genre, type
+            FROM genre
+        ');
+
+        $requete5 = $pdo->query('
+            SELECT 
+                r.id_realisateur,
+                CONCAT(p.nom, " ", p.prenom) as realisateurs
+            FROM
+                realisateur r
+            INNER JOIN
+                personne p ON P.id_personne = r.id_personne
+            
+        ');
+
 
         require "view/detailFilm.php";
     }
@@ -229,4 +207,72 @@ class FilmController{
     
         header("Location:index.php?action=listeFilm");
     }
+
+    // Modifier un film
+    public function modifFilm($id){
+        if(isset($_POST['submit'])){
+            // On récupère les infos du films
+            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $annee = filter_input(INPUT_POST, "annee", FILTER_SANITIZE_NUMBER_INT);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_SANITIZE_NUMBER_INT);
+            $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
+            $idRealisateur = filter_input(INPUT_POST, "realisateur", FILTER_SANITIZE_NUMBER_INT);
+
+            // On récupère les genres cochés
+            $categories = filter_input(INPUT_POST, 'categorie', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+                                   
+
+            // On ajoute le film si toutes les données sont correctes
+            if($titre && $annee && $duree && $synopsis && $note && $idRealisateur){
+                $affiche = "public/img/$titre.png";
+                
+                $pdo = Connect::seConnecter();
+                                
+                $requete = $pdo->prepare('
+                    UPDATE 
+                        film
+                    SET 
+                        titre = :titre, 
+                        annee_sortie = :annee,
+                        duree = :duree,
+                        synopsis = :synopsis,
+                        note = :note,
+                        id_realisateur = :id_realisateur
+                    WHERE
+                        id_film = :id_film
+                
+                ');
+                $requete->execute([
+                    'titre'=>$titre,
+                    'annee'=>$annee,
+                    'duree'=>$duree,
+                    'synopsis'=>$synopsis,
+                    'note'=> $note,
+                    'id_realisateur'=>$idRealisateur,
+                    'id_film'=>$id
+                ]);
+            
+
+                 
+
+                // if(!empty($categories)){
+                //     foreach($categories as $categorie){
+                //         $requete2 = $pdo->prepare('
+                //         INSERT INTO film_genre (id_film, id_genre)
+                //         VALUES (:id_film, :id_genre)
+                //         ');
+                //         $requete2->execute([
+                //             'id_film'=>$idFilm,
+                //             'id_genre'=>$categorie
+                //         ]);
+                //     }
+                // }
+            }
+        }
+
+        header("Location:index.php?action=detailFilm&id=$id");
+    }
+        
+    
 }

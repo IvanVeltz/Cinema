@@ -22,6 +22,39 @@ class CategorieController{
         require "view/categorie.php";
     }
 
+    public function detailCategorie($id){
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+            SELECT 
+                f.id_film, f.titre
+            FROM
+                film f
+            INNER JOIN
+                film_genre fg ON fg.id_film = f.id_film
+            WHERE 
+                fg.id_genre = :id
+        ");
+        $requete->execute([
+            "id"=>$id
+        ]);
+
+        $requete2 = $pdo->prepare("
+            SELECT
+                g.type
+            FROM
+                genre g
+            WHERE
+                g.id_genre = :id
+        ");
+        $requete2->execute([
+            "id"=>$id
+        ]);
+
+        require "view/detailCategorie.php";
+
+    }
+
     // Ajouter une catégorie
     public function ajoutCategorie(){
         if (isset($_POST['submit'])){
