@@ -29,6 +29,7 @@ if(isset($_GET['action'])){
         case "listeRealisateurs" : $ctrlRealisateur->listeRealisateurs(); break;
         case "detailRealisateur" : $ctrlRealisateur->detailRealisateur($id); break;
         case "ajoutRealisateur" : $ctrlRealisateur->ajoutRealisateur(); break;
+        case "supprimeRealisateur" : $ctrlRealisateur->supprimeRealisateur(); break;
         case "categorie" : $ctrlCategorie->categorie(); break;
         case "ajoutCategorie" : $ctrlCategorie->ajoutCategorie(); break;
 

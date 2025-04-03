@@ -1,8 +1,10 @@
 <?php ob_start(); ?>
+<div class="container-main">
 <!-- Ajout d'un realisateur  -->
+ <div class="container-form">
 <form action="index.php?action=ajoutRealisateur" method="post">
     <div class="input-group mb-3">
-        <label>Ajouter un acteur</label>
+        <label>Ajouter un réalisateur</label>
     </div>    
     <div>
         <label for="input-nom">Nom :</label>
@@ -16,12 +18,28 @@
         </select>
         <label for="input-ddn">Date de naissance :</label>
         <input type="date" id="input-ddn" name="ddn">
-        <input class="btn btn-primary" type="submit" name="submit">Ajouter</input>
-    </div>
+        <input class="btn btn-primary" type="submit" name="submit"></input>
     </div>
 </form>
+<form action="index.php?action=supprimeRealisateur" method="post">
+    <div class="input-group mb-3">
+        <label>Supprimer un réalisateur</label>
+    </div>    
+    <div>
+        <label for="select-realisateur"></label>
+        <select id="select-realisateur" name="idRealisateur">
+            <?php 
+            foreach($requete2->fetchAll() as $realisateur){
+                echo "<option value='".$realisateur['id_personne']."'>
+                        ".$realisateur['id_realisateur']." - ".$realisateur['realisateurs']."</option>";
+            }
+            ?>
+        </select>
+        <input class="btn btn-primary" type="submit" name="submit"></input>
+    </div>
+</form>
+</div>
 
-<p>Il y a <?= $requete1->rowCount() ?> réalisateurs</p>
 
 <div class="container-realisateurs">
 <?php
@@ -29,7 +47,7 @@ foreach($requete1->fetchAll() as $realisateur){
     ?>
     <div class="card border-primary mb-3">
         <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>">
-            <div class="card-header"><?= $realisateur['realisateurs']?></div>
+           <?= $realisateur['realisateurs']?>
         </a>
     </div>
     
@@ -37,6 +55,7 @@ foreach($requete1->fetchAll() as $realisateur){
     
 }
 ?>
+</div>
 </div>
 <?php
 

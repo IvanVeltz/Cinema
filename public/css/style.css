@@ -35,6 +35,10 @@ body {
     flex-direction:  column;
 }
 
+.container-main{
+    display: flex;
+}
+
 #wrapper {
     padding: 3em;
     flex: 1;
@@ -42,11 +46,9 @@ body {
 
 .container-film{
     width:80%;
-    margin:auto;
 }
 
 .container-acteur{
-    width: 300px;
     margin: auto;
 }
 
@@ -93,18 +95,25 @@ img{
 }
 
 .container-acteurs, .container-realisateurs, .container-films{
-    display: flex;
-    flex-direction: column;
+    width: 40%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    width: 300px;
-    margin: auto;
+    margin: 1em;
+    height: fit-content;
 }
 
-.wrapper form{
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+.card{
+    width: 120px;
 }
+
+#wrapper .container-form{
+    display: flex;
+    align-items: center; 
+    width: 60%!important;
+}
+
+
 
 form div{
     display: flex;

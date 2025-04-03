@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 <!-- Ajout d'un acteur  -->
+<div class="container-main">
 <form action="index.php?action=ajoutActeur" method="post">
     <div class="input-group mb-3">
         <label>Ajouter un acteur</label>
@@ -18,11 +19,9 @@
         <input type="date" id="input-ddn" name="ddn">
         <input class="btn btn-primary" type="submit" name="submit">
     </div>
-    </div>
+    
 </form>
 
-
-<p>Il y a <?= $requete1->rowCount() ?> acteurs</p>
 
 <div class="container-acteurs">
 <?php
@@ -30,7 +29,7 @@ foreach($requete1->fetchAll() as $acteur){
     ?>
     <div class="card border-primary mb-3">
         <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
-            <div class="card-header"><?= $acteur['acteurs']?></div>
+            <?= $acteur['acteurs']?>
         </a>
     </div>
     
@@ -38,6 +37,7 @@ foreach($requete1->fetchAll() as $acteur){
     
 }
 ?>
+</div>
 </div>
 <?php
 

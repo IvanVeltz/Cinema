@@ -17,6 +17,16 @@ class RealisateurController{
         ORDER BY
             realisateurs
         ");
+
+        $requete2 = $pdo->query("
+        SELECT 
+            r.id_realisateur, CONCAT(p.nom, ' ', p.prenom) AS realisateurs, p.id_personne
+        FROM 
+            personne p 
+        INNER JOIN
+            realisateur r ON r.id_personne = p.id_personne
+        
+        ");
            
 
         require "view/listeRealisateurs.php";
@@ -95,5 +105,26 @@ class RealisateurController{
 
         header("Location:index.php?action=listeRealisateurs");
     }
+
+    // Suppression d'un realisateur
+    public function supprimeRealisateur(){
+
+        if (isset($_POST['submit'])){
+            $id =  filter_input(INPUT_POST, "idRealisateur", FILTER_SANITIZE_NUMBER_INT);
+            if($id){
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                DELETE FROM personne
+                WHERE id_personne = :id
+                ');
+                $requete->execute([
+                    'id'=>$id
+                ]);
+            }
+        }
+
+        header("Location:index.php?action=listeRealisateurs");
+    }
+    
     
 }
