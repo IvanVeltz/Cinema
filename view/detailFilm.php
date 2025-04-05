@@ -47,7 +47,10 @@ $realisateurs = $requete5->fetchAll();
         </div>
     </div>
 </section>
-<form action="index.php?action=modifFilm&id=<?=$film['id_film']?>" method="post">
+<!-- Bouton pour afficher le formulaire -->
+<button id="btnModifier">Modifier</button>
+
+<form action="index.php?action=modifFilm&id=<?=$film['id_film']?>" method="post" id="formModifier" style="display : none;">
             <div class="input-group mb-3">
                 <label>Modifier le film</label>
             </div>
@@ -61,9 +64,13 @@ $realisateurs = $requete5->fetchAll();
                 <label for="input-synopsis">Synopsis</label>
                 <input type="text" id="input-synopsis" name="synopsis" value="<?=$film['synopsis']?>" style="width: 300px; height: 300px;">
                 <label for="input-note">Note /5</label>
-                <select name="note" id="input-note" value="<?=$film['note'] ?>">
+                <select name="note" id="input-note">">
                     <?php for($i=1;$i<=5; $i++){
-                        echo "<option value='$i'>$i</option>";
+                        if($film['note'] == $i){
+                            echo "<option value='$i' selected>$i</option>";
+                        } else {
+                            echo "<option value='$i'>$i</option>";
+                        }
                     }
                     ?>
                 </select>
@@ -73,9 +80,9 @@ $realisateurs = $requete5->fetchAll();
                     <?php
                         foreach ($tousGenres as $genre) {
                             if (in_array($genre['id_genre'], array_column($genresFilm, 'id_genre'))) {
-                                echo "<label><input type='checkbox' name='categorie[]' value='" . $genre['id_genre'] . "' checked>" . $genre['type'] . "</label>";
+                                echo "<label><input type='checkbox' name='categories[]' value='" . $genre['id_genre'] . "' checked>" . $genre['type'] . "</label>";
                             } else {
-                                echo "<label><input type='checkbox' name='categorie[]' value='" . $genre['id_genre'] . "'>" . $genre['type'] . "</label>";
+                                echo "<label><input type='checkbox' name='categories[]' value='" . $genre['id_genre'] . "'>" . $genre['type'] . "</label>";
                             }
                         }
                     ?>
@@ -96,6 +103,8 @@ $realisateurs = $requete5->fetchAll();
                 </select>
 
                 <input class="btn btn-primary" type="submit" name="submit"></input>
+                <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
+
             </div>
         </form>
 

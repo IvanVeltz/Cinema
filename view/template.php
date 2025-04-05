@@ -39,7 +39,6 @@
 <div id="wrapper">
         <main>
             <div id=contenu>
-                <h2><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>
         </main>
@@ -70,6 +69,6 @@
     </div>
 </footer>
 
-    
+<script src="public/js/script.js"></script>
 </body>
 </html>

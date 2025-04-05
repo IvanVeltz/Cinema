@@ -9,7 +9,7 @@
             </div>
             <div>
                 <input type="text" id="input-genre" name="nom_categorie">
-                <input class="btn btn-primary" type="submit" name="submit">Ajouter</input>
+                <input class="btn btn-primary" type="submit" name="submit"></input>
             </div>
             
         </form>
@@ -32,25 +32,27 @@
             </div>
         </form>
     </div>
-<div class="container-acteurs">
-<?php
-foreach($requete->fetchAll() as $categorie){
+<div class="container-films">
+    <h3>Liste des catégories</h3>
+    <div>
+    <?php
+    foreach($requete->fetchAll() as $categorie){
     ?>
-    <div class="card border-primary mb-3">
-        <a href="index.php?action=detailCategorie&id=<?=$categorie['id_genre']?>">
-            <?= $categorie['type']?>
-        </a>
+        <div class="card border-primary mb-3">
+            <a href="index.php?action=detailCategorie&id=<?=$categorie['id_genre']?>">
+                <?= $categorie['type']?>
+            </a>
+        </div>
+        
+    <?php 
+    }
+    ?>
     </div>
-    
-<?php
-    
-}
-?>
 </div>
 <?php
 
 $titre = "Liste des catégorie";
-$titre_secondaire = "Liste des catégories";
+$titre_secondaire = "";
 $contenu = ob_get_clean();
 require "view/template.php";
 ?>

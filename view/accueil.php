@@ -71,24 +71,25 @@ $genre = [];
     </div>
 
     <div class="container-films">
-    <?php
-    foreach($requete->fetchAll() as $film){
+        <h3>Tous les Films</h3>
+        <div>
+        <?php
+        foreach($requete->fetchAll() as $film){
+            ?>
+            <div class="card border-primary mb-3">
+                <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
+                    <?= $film['titre']?>
+                </a>
+            </div>
+            
+        <?php
+        }
         ?>
-        <div class="card border-primary mb-3">
-            <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
-                <?= $film['titre']?>
-            </a>
         </div>
-        
-    <?php
-        
-    }
-    ?>
     </div>
 </div>
 
 <?php
 $titre = "Accueil";
-$titre_secondaire = "Film du moment";
 $contenu = ob_get_clean();
 require "view/template.php";

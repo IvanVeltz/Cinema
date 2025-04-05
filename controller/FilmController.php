@@ -14,7 +14,8 @@ class FilmController{
             f.id_film, f.titre
         FROM
             film f
-        LIMIT 5
+        ORDER BY
+            f.annee_sortie DESC
         ");
 
         $requete2 = $pdo->query('
@@ -205,7 +206,7 @@ class FilmController{
             }
         }
     
-        header("Location:index.php?action=listeFilm");
+        header("Location:index.php?action=accueil");
     }
 
     // Modifier un film
@@ -220,7 +221,7 @@ class FilmController{
             $idRealisateur = filter_input(INPUT_POST, "realisateur", FILTER_SANITIZE_NUMBER_INT);
 
             // On récupère les genres cochés
-            $categories = filter_input(INPUT_POST, 'categorie', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+            $categories = filter_input(INPUT_POST, 'categories', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
                                    
 
             // On ajoute le film si toutes les données sont correctes
@@ -252,22 +253,28 @@ class FilmController{
                     'id_realisateur'=>$idRealisateur,
                     'id_film'=>$id
                 ]);
-            
+                
 
-                 
+                $requete3 = $pdo->prepare('
+                    DELETE FROM film_genre WHERE id_film = :id
+                ');
+                $requete3->execute([
+                    'id'=>$id
+                ]);
+                
 
-                // if(!empty($categories)){
-                //     foreach($categories as $categorie){
-                //         $requete2 = $pdo->prepare('
-                //         INSERT INTO film_genre (id_film, id_genre)
-                //         VALUES (:id_film, :id_genre)
-                //         ');
-                //         $requete2->execute([
-                //             'id_film'=>$idFilm,
-                //             'id_genre'=>$categorie
-                //         ]);
-                //     }
-                // }
+                if(!empty($categories) && is_array($categories)){
+                    foreach($categories as $categorie){
+                         $requete2 = $pdo->prepare('
+                         INSERT INTO film_genre (id_film, id_genre)
+                         VALUES (:id_film, :id_genre)
+                         ');
+                         $requete2->execute([
+                             'id_film'=>$id,
+                             'id_genre'=>$categorie
+                         ]);
+                     }
+                }
             }
         }
 

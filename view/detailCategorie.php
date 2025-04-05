@@ -5,7 +5,7 @@
 
 <p>Il y a <?= $requete->rowCount() ?> films</p>
 
-<div class="container-films">
+<div class="container-categorie">
 <?php
 foreach($requete->fetchAll() as $film){
     ?>

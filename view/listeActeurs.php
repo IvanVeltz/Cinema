@@ -40,26 +40,29 @@
         </form>
     </div>
 
-<div class="container-acteurs">
-<?php
-foreach($requete1->fetchAll() as $acteur){
-    ?>
-    <div class="card border-primary mb-3">
-        <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
-            <?= $acteur['acteurs']?>
-        </a>
+    <div class="container-films">
+        <h3>Liste des acteurs</h3>
+        <div>
+        <?php
+        foreach($requete1->fetchAll() as $acteur){
+            ?>
+            <div class="card border-primary mb-3">
+                <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
+                    <?= $acteur['acteurs']?>
+                </a>
+            </div>
+            
+        <?php
+            
+        }
+        ?>
+        </div>
     </div>
-    
-<?php
-    
-}
-?>
-</div>
 </div>
 <?php
 
 $titre = "Liste des acteurs";
-$titre_secondaire = "Liste des acteurs";
+$titre_secondaire = "";
 $contenu = ob_get_clean();
 require "view/template.php";
 ?>

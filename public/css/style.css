@@ -97,17 +97,32 @@ img{
     height: auto;
 }
 
-.container-acteurs, .container-realisateurs, .container-films{
+ .container-films{
     width: 40%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     margin: 1em;
     height: fit-content;
 }
 
+.container-categorie{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 10px;
+    height: fit-content;
+}
+
+.container-films>div{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+
+}
+
 .card{
     width: 120px;
+    padding: 3px;
 }
 
 .card-film{
@@ -120,12 +135,15 @@ img{
 }
 
 #wrapper .container-form{
-    display: flex;
-    align-items: center; 
+    display: flex; 
+    gap: 10px;
+    justify-content: space-around;
     width: 60%!important;
 }
 
-
+h2{
+    margin-bottom: 1em;
+}
 
 form div{
     display: flex;
