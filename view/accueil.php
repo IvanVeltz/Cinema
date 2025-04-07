@@ -8,7 +8,7 @@ $genre = [];
 <div class="container-main">
     <div class="container-form">
     <!-- Ajout d'un film  -->
-        <form action="index.php?action=ajoutFilm" method="post">
+        <form action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
                 <label>Ajouter un film</label>
             </div>
@@ -21,6 +21,8 @@ $genre = [];
                 <input type="text" id="input-duree" name="duree">
                 <label for="input-synopsis">Synopsis</label>
                 <input type="text" id="input-synopsis" name="synopsis">
+                <label for="affiche">Affiche du film : </label>
+                <input type="file" name="affiche" id="affiche">
                 <label for="input-note">Note /5</label>
                 <select name="note" id="input-note">
                     <?php for($i=1;$i<=5; $i++){

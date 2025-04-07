@@ -147,7 +147,22 @@ class FilmController{
 
             // On ajoute le film si toutes les données sont correctes
             if($titre && $annee && $duree && $synopsis && $note && $idRealisateur){
-                $affiche = "public/img/$titre.jpg";
+                
+                if(isset($_FILES['affiche'])){
+                    $affichePath = $_FILES['affiche']['tmp_name'];
+                    if($affichePath != ""){
+                        $mimeType = mime_content_type($affichePath);
+                        if ($mimeType === "image/jpeg"){
+                            $affiche = "public/img/$titre.jpg"; 
+                            move_uploaded_file($affichePath, $affiche);
+                        } else {
+                            $affiche = "public/img/default.jpg";
+                        }
+                    } else {
+                        $affiche = "public/img/default.jpg";
+                    }
+                }
+                
                 
                 $pdo = Connect::seConnecter();
                                 
@@ -243,6 +258,17 @@ class FilmController{
                 $requete->execute([
                     'id'=>$id
                 ]);
+
+                $requete2 = $pdo->prepare('
+                    SELECT affiche FROM film WHERE id_film = :id
+                ');
+                $requete2->execute([
+                    'id'=>$id
+                ]);
+                $affiche = $requete2->fetch();
+                if(file_exists($affiche) && $affiche != "public/img/default.jpg"){
+                    unlink($affiche);
+                }
             }
         }
     
@@ -266,7 +292,7 @@ class FilmController{
 
             // On ajoute le film si toutes les données sont correctes
             if($titre && $annee && $duree && $synopsis && $note && $idRealisateur){
-                $affiche = "public/img/$titre.png";
+                
                 
                 $pdo = Connect::seConnecter();
                                 
@@ -293,6 +319,7 @@ class FilmController{
                     'id_realisateur'=>$idRealisateur,
                     'id_film'=>$id
                 ]);
+                
                 
 
                 $requete3 = $pdo->prepare('
