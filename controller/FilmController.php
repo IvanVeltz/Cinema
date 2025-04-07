@@ -258,17 +258,6 @@ class FilmController{
                 $requete->execute([
                     'id'=>$id
                 ]);
-
-                $requete2 = $pdo->prepare('
-                    SELECT affiche FROM film WHERE id_film = :id
-                ');
-                $requete2->execute([
-                    'id'=>$id
-                ]);
-                $affiche = $requete2->fetch();
-                if(file_exists($affiche) && $affiche != "public/img/default.jpg"){
-                    unlink($affiche);
-                }
             }
         }
     
