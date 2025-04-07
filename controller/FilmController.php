@@ -11,7 +11,7 @@ class FilmController{
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
         SELECT  
-            f.id_film, f.titre
+            f.id_film, f.titre, f.affiche
         FROM
             film f
         ORDER BY

@@ -48,12 +48,10 @@ $realisateurs = $requete5->fetchAll();
     </div>
 </section>
 <!-- Bouton pour afficher le formulaire -->
-<button id="btnModifier">Modifier</button>
+<button id="gestion">Modifier</button>
 
-<form action="index.php?action=modifFilm&id=<?=$film['id_film']?>" method="post" id="formModifier" style="display : none;">
-            <div class="input-group mb-3">
-                <label>Modifier le film</label>
-            </div>
+<form action="index.php?action=modifFilm&id=<?=$film['id_film']?>" method="post" id="container-form" style="display : none;">
+            
             <div>
                 <label for="input-titre">Titre du Film</label>
                 <input type="text" id="input-titre" name="titre" value="<?=$film['titre']?>">

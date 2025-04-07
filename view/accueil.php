@@ -6,12 +6,34 @@ $genre = [];
 
 ?>
 <div class="container-main">
-    <div class="container-form">
-    <!-- Ajout d'un film  -->
-        <form action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
-            <div class="input-group mb-3">
-                <label>Ajouter un film</label>
+    <div class="container-films">
+        <h3>Tous les Films</h3>
+        <div>
+        <?php
+        foreach($requete->fetchAll() as $film){
+            ?>
+            <div class="card border-primary mb-3">
+                <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
+                    <?= $film['titre']?>
+                    <div class="card-body card-film">
+                        <figure>
+                            <img src="<?=$film['affiche']?>" alt="Affiche du film">
+                        </figure>
+                    </div>
+                </a>
             </div>
+            
+        <?php
+        }
+        ?>
+        </div>
+    </div>
+    <button id="gestion" class="btn btn-outline-primary">Gérer les films</button>
+           
+    <div class="container-form" id="container-form" style="display: none">
+        <!-- Ajout d'un film  -->
+        <label>Ajouter un film</label>
+        <form action="index.php?action=ajoutFilm" method="post" enctype="multipart/form-data">
             <div>
                 <label for="input-titre">Titre du Film</label>
                 <input type="text" id="input-titre" name="titre">
@@ -53,10 +75,9 @@ $genre = [];
                 <input class="btn btn-primary" type="submit" name="submit"></input>
             </div>
         </form>
+    
+        <label>Supprimer un film un film</label>
         <form action="index.php?action=supprimeFilm" method="post">
-            <div class="input-group mb-3">
-                <label>Supprimer un film</label>
-            </div>
             <div>
                 <label for="select-film"></label>
                 <select id="select-film" name="idFilm">
@@ -70,27 +91,11 @@ $genre = [];
                 <input class="btn btn-primary" type="submit" name="submit"></input>
             </div>
         </form>
-    </div>
+        
+        <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
 
-    <div class="container-films">
-        <h3>Tous les Films</h3>
-        <div>
-        <?php
-        foreach($requete->fetchAll() as $film){
-            ?>
-            <div class="card border-primary mb-3">
-                <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
-                    <?= $film['titre']?>
-                </a>
-            </div>
-            
-        <?php
-        }
-        ?>
-        </div>
     </div>
 </div>
-
 <?php
 $titre = "Accueil";
 $contenu = ob_get_clean();

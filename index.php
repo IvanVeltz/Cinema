@@ -41,7 +41,6 @@ if(isset($_GET['action'])){
         case "categorie" : $ctrlCategorie->categorie(); break;
         case "ajoutCategorie" : $ctrlCategorie->ajoutCategorie(); break;
         case "supprimeCategorie" : $ctrlCategorie->supprimeCategorie(); break;
-        case "detailCategorie" : $ctrlCategorie->detailCategorie($id); break;
 
         default: $ctrlFilm->accueil();
     }

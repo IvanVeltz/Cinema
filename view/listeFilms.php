@@ -1,22 +1,28 @@
 <?php ob_start(); ?>
 
-<p>Il y a <?= $requete->rowCount() ?> films</p>
 
-
-<div class="container-films">
-<?php
-foreach($requete->fetchAll() as $film){
-    ?>
-    <div class="card border-primary mb-3">
-        <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
-            <div class="card-header"><?= $film['titre']?></div>
-        </a>
+<div class="container-main">
+    <div class="container-films">
+        <div>
+        <?php
+        foreach($requete->fetchAll() as $film){
+            ?>
+            <div class="card card-acteur border-primary mb-3">
+                <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
+                    <?= $film['titre']?>
+                    <div class="card-body">
+                        <figure>
+                            <img src="<?=$film['affiche']?>" alt="Affiche du film">
+                        </figure>
+                    </div>
+                </a>
+            </div>
+            
+        <?php
+        }
+        ?>
+        </div>
     </div>
-    
-<?php
-    
-}
-?>
 </div>
         
     

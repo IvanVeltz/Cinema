@@ -1,7 +1,27 @@
 <?php ob_start(); ?>
 <div class="container-main">
 <!-- Ajout d'un realisateur  -->
-    <div class="container-form">
+    <div class="container-films">
+        <h3>Liste des réalisateurs</h3>
+        <div>
+        <?php
+        foreach($requete1->fetchAll() as $realisateur){
+            ?>
+            <div class="card card-acteur border-primary mb-3">
+                <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>">
+                <?= $realisateur['realisateurs']?>
+                </a>
+            </div>
+            
+        <?php
+            
+        }
+        ?>
+        </div>
+    </div>
+    <button id="gestion" class="btn btn-outline-primary">Gestion Réalisateur</button>
+    
+    <div class="container-form" id="container-form" style="display : none;">
         <form action="index.php?action=ajoutRealisateur" method="post">
             <div class="input-group mb-3">
                 <label>Ajouter un réalisateur</label>
@@ -38,28 +58,15 @@
                 <input class="btn btn-primary" type="submit" name="submit"></input>
             </div>
         </form>
+        <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
+    
     </div>
 
 
-    <div class="container-films">
-        <h3>Liste des réalisateurs</h3>
-        <div>
-        <?php
-        foreach($requete1->fetchAll() as $realisateur){
-            ?>
-            <div class="card border-primary mb-3">
-                <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>">
-                <?= $realisateur['realisateurs']?>
-                </a>
-            </div>
-            
-        <?php
-            
-        }
-        ?>
-        </div>
-    </div>
+   
 </div>
+
+<script src="public/js/scriptActeur.js"></script>
 <?php
 
 $titre = "Liste des realisateurs";

@@ -1,7 +1,25 @@
 <?php ob_start(); ?>
 
 <div class="container-main">
-    <div class="container-form">
+    <div class="container-films">
+        <h3>Liste des catégories</h3>
+        <div>
+        <?php
+        foreach($requete->fetchAll() as $categorie){
+        ?>
+            <div class="card card-acteur border-primary mb-3">
+                <a href="index.php?action=listeFilms&id=<?=$categorie['id_genre']?>">
+                    <?= $categorie['type']?>
+                </a>
+            </div>
+            
+        <?php 
+        }
+        ?>
+        </div>
+    </div>
+    <button id="gestion" class="btn btn-outline-primary">Gestion Catégorie</button>
+    <div class="container-form" id="container-form" style="display: none;">
         <!-- Ajout d'une catégorie  -->
         <form action="index.php?action=ajoutCategorie" method="post">
             <div class="input-group mb-3">
@@ -31,24 +49,10 @@
                 <input class="btn btn-primary" type="submit" name="submit"></input>
             </div>
         </form>
-    </div>
-<div class="container-films">
-    <h3>Liste des catégories</h3>
-    <div>
-    <?php
-    foreach($requete->fetchAll() as $categorie){
-    ?>
-        <div class="card border-primary mb-3">
-            <a href="index.php?action=detailCategorie&id=<?=$categorie['id_genre']?>">
-                <?= $categorie['type']?>
-            </a>
-        </div>
-        
-    <?php 
-    }
-    ?>
+        <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
     </div>
 </div>
+<script src="public/js/scriptActeur.js"></script>
 <?php
 
 $titre = "Liste des catégorie";

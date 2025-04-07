@@ -6,7 +6,28 @@ $films=$requete3->fetchAll();
 ?>
 <!-- Ajout d'un acteur  -->
 <div class="container-main">
-    <div class="container-form">
+    <div class="container-films">
+        <h3>Liste des acteurs</h3>
+        <div>
+        <?php
+        foreach($acteurs as $acteur){
+            ?>
+            <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
+                <div class="card card-acteur border-primary mb-3">
+                    <p><?= $acteur['acteurs']?></p>
+                </div>
+            </a>
+            
+        <?php
+            
+        }
+        ?>
+        </div>
+    </div>
+
+    <button id="gestion" class="btn btn-outline-primary">Gestion Acteur Role</button>
+         
+    <div class="container-form" id="container-form" style="display : none;">
         <form action="index.php?action=ajoutActeur" method="post">
             <div class="input-group mb-3">
                 <label>Ajouter un acteur</label>
@@ -114,28 +135,12 @@ $films=$requete3->fetchAll();
                 
             </form>
         </div>
-
+    <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
     </div>
 
-    <div class="container-films">
-        <h3>Liste des acteurs</h3>
-        <div>
-        <?php
-        foreach($acteurs as $acteur){
-            ?>
-            <div class="card border-primary mb-3">
-                <a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>">
-                    <?= $acteur['acteurs']?>
-                </a>
-            </div>
-            
-        <?php
-            
-        }
-        ?>
-        </div>
-    </div>
+    
 </div>
+<script src="public/js/scriptActeur.js"></script>
 <?php
 
 $titre = "Liste des acteurs";

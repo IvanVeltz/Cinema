@@ -29,12 +29,10 @@ $date = date("d/m/Y", strtotime($acteur['date_naissance_personne']));
     </div>
 </section>
 
-<button id="btnModifier">Modifier</button>
+<button id="gestion">Modifier</button>
 
-<form action="index.php?action=modifActeur&id=<?=$acteur['id_personne']?>" method="post" id="formModifier" style="display : none;">
-            <div class="input-group mb-3">
-                <label>Modifier l'acteur</label>
-            </div>
+<form action="index.php?action=modifActeur&id=<?=$acteur['id_personne']?>" method="post" id="container-form" style="display : none;">
+            
             <div>
                 <label for="input-titre">Nom</label>
                 <input type="text" id="input-nom" name="nom" value="<?=$acteur['nom']?>">
