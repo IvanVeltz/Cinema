@@ -7,11 +7,11 @@
         <?php
         foreach($requete1->fetchAll() as $realisateur){
             ?>
-            <div class="card card-acteur border-primary mb-3">
-                <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>">
-                <?= $realisateur['realisateurs']?>
-                </a>
-            </div>
+            <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>">
+                <div class="card card-acteur border-primary mb-3">
+                    <p><?= $realisateur['realisateurs']?></p>
+                </div>
+            </a>
             
         <?php
             

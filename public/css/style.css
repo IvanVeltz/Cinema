@@ -70,11 +70,11 @@ body {
 }
 
 a{
-    text-decoration: none !important;
+    text-decoration: none ;
 }
 
 p a:hover, .acteur a:hover{
-    text-decoration: underline !important;
+    text-decoration: underline;
 }
 
 .container-film-moment{
@@ -131,8 +131,16 @@ img{
     height:60px;
 }
 
+.card-acteur>p{
+    margin-bottom: 0;
+}
+
 .card-film{
-    width : 100%;
+    width : 120px;
+}
+
+.card-affiche{
+    padding:0;
 }
 
 .card-acteur{

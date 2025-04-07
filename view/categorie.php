@@ -7,12 +7,11 @@
         <?php
         foreach($requete->fetchAll() as $categorie){
         ?>
-            <div class="card card-acteur border-primary mb-3">
-                <a href="index.php?action=listeFilms&id=<?=$categorie['id_genre']?>">
+            <a href="index.php?action=listeFilms&id=<?=$categorie['id_genre']?>">
+                <div class="card card-acteur border-primary mb-3">
                     <?= $categorie['type']?>
-                </a>
-            </div>
-            
+                </div>
+            </a>
         <?php 
         }
         ?>
