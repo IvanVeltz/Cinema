@@ -29,6 +29,40 @@ $date = date("d/m/Y", strtotime($acteur['date_naissance_personne']));
     </div>
 </section>
 
+<button id="btnModifier">Modifier</button>
+
+<form action="index.php?action=modifActeur&id=<?=$acteur['id_personne']?>" method="post" id="formModifier" style="display : none;">
+            <div class="input-group mb-3">
+                <label>Modifier l'acteur</label>
+            </div>
+            <div>
+                <label for="input-titre">Nom</label>
+                <input type="text" id="input-nom" name="nom" value="<?=$acteur['nom']?>">
+                <label for="input-prenom">Prénom</label>
+                <input type="text" id="input-prenom" name="prenom" value="<?=$acteur['prenom']?>">
+                <label for="input-sexe">Sexe</label>
+                <select id="select-sexe" name="sexe">
+                    <?php 
+                    if($acteur['sexe'] == 'Homme'){?>
+                        <option value="Homme" selected>Homme</option>
+                        <option value="Femme">Femme</option>
+                    <?php
+                    } else {
+                        ?>
+                        <option value="Homme">Homme</option>
+                        <option value="Femme" selected>Femme</option>
+                    <?php
+                    }
+                    ?>
+                </select>
+                <label for="input-ddn">Date de naissance :</label>
+                <input type="date" id="input-ddn" name="ddn" value="<?=$acteur['date_naissance_personne']?>">
+                <input class="btn btn-primary" type="submit" name="submit"></input>
+                <button class="btn btn-primary" type="button" id="btnAnnuler">Annuler</button>
+
+            </div>
+</form>
+
 <?php
 
 $titre = $acteur['acteur'];

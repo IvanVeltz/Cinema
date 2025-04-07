@@ -141,7 +141,7 @@ img{
     width: 60%!important;
 }
 
-h2{
+.container-form>div>form{
     margin-bottom: 1em;
 }
 

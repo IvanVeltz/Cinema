@@ -147,7 +147,7 @@ class FilmController{
 
             // On ajoute le film si toutes les données sont correctes
             if($titre && $annee && $duree && $synopsis && $note && $idRealisateur){
-                $affiche = "public/img/$titre.png";
+                $affiche = "public/img/$titre.jpg";
                 
                 $pdo = Connect::seConnecter();
                                 
@@ -187,6 +187,46 @@ class FilmController{
         header("Location:index.php?action=accueil");
 
         
+    }
+
+    // Lister les films 
+    public function listeFilms($id) {
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+            SELECT 
+                f.id_film, f.titre, TIME_FORMAT(SEC_TO_TIME(f.duree * 60), '%Hh%i') AS temps, g.type, 
+                CONCAT(SUBSTRING(f.synopsis, 1 , 600),'...') AS synopsis, f.annee_sortie, f.affiche, CONCAT(p.nom, ' ', p.prenom) AS realisateur
+            FROM
+                film f
+            INNER JOIN 
+                film_genre fg ON fg.id_film = f.id_film
+            INNER JOIN 
+                genre g ON g.id_genre = fg.id_genre
+            INNER JOIN 
+                realisateur r ON r.id_realisateur = f.id_realisateur
+            INNER JOIN 
+                personne p ON p.id_personne = r.id_personne
+            WHERE g.id_genre = :id
+            GROUP BY f.id_film  
+        ");
+        $requete->execute([
+            "id"=>$id
+        ]);
+
+        $requete2 = $pdo->prepare("
+            SELECT
+                type
+            FROM
+                genre
+            WHERE id_genre = :id
+        ");
+        $requete2->execute([
+            "id"=>$id
+        ]);
+
+
+        require "view/listeFilms.php";
     }
 
     // Supprimer film

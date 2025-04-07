@@ -40,7 +40,8 @@ class RealisateurController{
             SELECT
                 CONCAT(p.nom, ' ', p.prenom) AS realisateur,
                 p.date_naissance_personne,
-                p.sexe
+                p.sexe,
+                p.nom, p.prenom, p.id_personne
             FROM personne p
             INNER JOIN
                 realisateur r ON r.id_personne = p.id_personne
@@ -126,5 +127,46 @@ class RealisateurController{
         header("Location:index.php?action=listeRealisateurs");
     }
     
-    
+     // Modifier un acteur
+     public function modifRealisateur($id){
+        if (isset($_POST['submit'])){
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $ddn = filter_input(INPUT_POST, "ddn", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if($nom&&$prenom&&$sexe&&$ddn){
+                $pdo = Connect::seConnecter();
+                $requete = $pdo->prepare('
+                    UPDATE
+                        personne
+                    SET
+                        nom = :nom,
+                        prenom = :prenom,
+                        sexe = :sexe,
+                        date_naissance_personne = :ddn
+                    WHERE
+                        id_personne = :id
+                ');
+                $requete->execute([
+                    'nom'=>$nom,
+                    'prenom'=>$prenom,
+                    'sexe'=>$sexe,
+                    'ddn'=>$ddn,
+                    'id'=>$id
+                ]);
+            }
+        }
+
+        $requete2 = $pdo->prepare('
+            SELECT id_realisateur
+            FROM realisateur
+            WHERE id_personne = :id
+        ');
+        $requete2->execute([
+            'id'=>$id
+        ]);
+        $result = $requete2->fetch();
+        $id_realisateur = $result['id_realisateur'];
+        header("Location:index.php?action=detailRealisateur&id=$id_realisateur");
+    }
 }
