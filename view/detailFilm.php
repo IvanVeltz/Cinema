@@ -11,7 +11,7 @@ $realisateurs = $requete5->fetchAll();
 ?>
 
 <section class="container-film">
-    <div class="card card-film border-primary mb-3">
+    <div class="card border-primary mb-3">
         <div class="card-header"><?= $film["titre"]?></div>
         <div class="card-body container-film-moment">
             <aside>
@@ -60,7 +60,7 @@ $realisateurs = $requete5->fetchAll();
                 <label for="input-duree">Durée (en min)</label>
                 <input type="text" id="input-duree" name="duree"value="<?=$film['duree']?>">
                 <label for="input-synopsis">Synopsis</label>
-                <input type="text" id="input-synopsis" name="synopsis" value="<?=$film['synopsis']?>" style="width: 300px; height: 300px;">
+                <textarea name="synopsis" id="synopsis" cols="50" rows="4"><?=$film['synopsis']?></textarea>
                 <label for="input-note">Note /5</label>
                 <select name="note" id="input-note">">
                     <?php for($i=1;$i<=5; $i++){

@@ -12,10 +12,10 @@ $genre = [];
         <?php
         foreach($requete->fetchAll() as $film){
             ?>
-            <div class="card border-primary mb-3">
+            <div class="card card-film border-primary mb-3">
                 <a href="index.php?action=detailFilm&id=<?=$film['id_film'] ?>">
                     <?= $film['titre']?>
-                    <div class="card-body card-film">
+                    <div class="card-body card-affiche">
                         <figure>
                             <img src="<?=$film['affiche']?>" alt="Affiche du film">
                         </figure>
@@ -42,7 +42,7 @@ $genre = [];
                 <label for="input-duree">Durée (en min)</label>
                 <input type="text" id="input-duree" name="duree">
                 <label for="input-synopsis">Synopsis</label>
-                <input type="text" id="input-synopsis" name="synopsis">
+                <textarea id="input-synopsis" name="synopsis" rows="4" cols="50"></textarea>
                 <label for="affiche">Affiche du film : </label>
                 <input type="file" name="affiche" id="affiche">
                 <label for="input-note">Note /5</label>
