@@ -35,6 +35,21 @@ body {
     flex-direction:  column;
 }
 
+.clr-white{
+ color: white;   
+}
+
+.hidden{
+    display: none;
+}
+
+#liens{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
 .container-main{
     display: flex;
     flex-direction: column;
@@ -56,10 +71,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
-    
-
 
 .acteur p{
     text-align: left;
@@ -127,6 +138,8 @@ img{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
     gap: 1em;
+    align-items: center; 
+    justify-items: center;
 }
 
 .card-acteur{
@@ -150,7 +163,8 @@ img{
 
 .card-acteur{
     margin: auto;
-    width: 100%;
+    
+    width: 120px;
 }
 
 .card-film{
@@ -272,7 +286,8 @@ form div{
     color: var(--accent);
     text-decoration: underline;
 }
-@media (max-width: 768px) {
+
+@media only screen and (max-width: 767px) {
     .footer-content {
         flex-direction: column;
         gap: var(--spacing-lg);
@@ -281,5 +296,15 @@ form div{
     .footer-title-container {
         width: 90%;
     }
+
+    .hidden{
+        display: block;
+    }
+
+    #liens{
+        display: none;
+        flex-direction: column;
+    }
+
 }
 

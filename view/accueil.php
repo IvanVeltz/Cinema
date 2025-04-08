@@ -7,7 +7,7 @@ $genre = [];
 ?>
 <div class="container-main">
     <div class="container-films">
-        <h3>Tous les Films</h3>
+        <h3>Derniers films</h3>
         <div>
         <?php
         foreach($requete->fetchAll() as $film){

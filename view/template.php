@@ -9,32 +9,17 @@
     <title><?= $titre ?></title>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" id="menu">
     
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=accueil">Accueil
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=categorie">Catégorie
-          </a>
-        </li>
-    
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeActeurs">Acteurs
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php?action=listeRealisateurs">Réalisateurs
-          </a>
-        </li>
-        
+    <a href="#" class="clr-white fa-solid fa-bars hidden" id="menu"></a>
+    <div id="liens">
+      <a class="nav-link active" href="index.php?action=accueil">Accueil</a>
+      <a class="nav-link active" href="index.php?action=categorie">Catégorie</a>
+      <a class="nav-link active" href="index.php?action=listeActeurs">Acteurs</a>
+      <a class="nav-link active" href="index.php?action=listeRealisateurs">Réalisateurs</a>
     </div>
-  </div>
+    
+  
 </nav>
 <div id="wrapper">
         <main>
@@ -69,6 +54,7 @@
     </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="public/js/script.js"></script>
 </body>
 </html>

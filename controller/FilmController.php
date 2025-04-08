@@ -16,6 +16,7 @@ class FilmController{
             film f
         ORDER BY
             f.annee_sortie DESC
+        LIMIT 5
         ");
 
         $requete2 = $pdo->query('

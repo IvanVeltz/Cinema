@@ -13,4 +13,14 @@ document.addEventListener("DOMContentLoaded", function() {
     btnAnnuler.addEventListener("click", function() {
         containerForm.style.display = "none"; // Cache le formulaire
     });
+
+    var x = document.getElementById("liens");
+    var menuBurger = document.getElementById('menu');
+    menuBurger.addEventListener('click', function(){
+        if (x.style.display === "flex") {
+            x.style.display = "none";
+          } else {
+            x.style.display = "flex";
+          }
+    })
 });
