@@ -14,13 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
         containerForm.style.display = "none"; // Cache le formulaire
     });
 
-    var x = document.getElementById("liens");
-    var menuBurger = document.getElementById('menu');
+    let liens = document.getElementById("liens");
+    let menuBurger = document.getElementById('menu');
     menuBurger.addEventListener('click', function(){
-        if (x.style.display === "flex") {
-            x.style.display = "none";
+        if (liens.style.display === "flex") {
+            liens.style.display = "none";
           } else {
-            x.style.display = "flex";
+            liens.style.display = "flex";
           }
     })
 });
